@@ -325,3 +325,15 @@ input:not([type]), input[type="text"], .lookup input { font: 16px var(--font-bod
 .tracker .cart-line:hover { text-decoration: none; }
 .tracker .cart-line small { display: block; color: var(--muted); }
 .tracker-result .btn { margin-top: 16px; width: 100%; }
+
+/* 3D bike builder */
+.bike3d { position: relative; margin: 8px 0 12px; }
+.bike3d-canvas { width: 100%; aspect-ratio: 16 / 10; border-radius: var(--radius); overflow: hidden; cursor: grab; touch-action: none; }
+.bike3d-canvas:active { cursor: grabbing; }
+.bike3d-canvas canvas { display: block; width: 100% !important; height: 100% !important; }
+.bike3d-loading { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-weight: 600; }
+.bike3d-tools { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.bike3d-tools button { border: 1.5px solid var(--line); background: var(--card); color: var(--fg); border-radius: 999px; padding: 6px 12px; font: 600 13px var(--font-body); cursor: pointer; }
+.bike3d-tools button:hover { border-color: var(--fg); }
+.bike3d-tools button.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+.bike3d-hint { margin: 6px 0 0; font-size: 12px; color: var(--muted); }

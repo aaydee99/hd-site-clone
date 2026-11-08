@@ -1,6 +1,7 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
 import Link from '@/components/PlainLink';
+import Bike3D from './Bike3D';
 
 // Original configurator: fictional models, options and prices.
 type Opt = { id: string; label: string; price: number; color?: string };
@@ -152,7 +153,9 @@ export default function BikeBuilder({ locale, dealerHref }: { locale: string; de
     <div className="bb">
       <div className="bb-stage">
         <div className="bb-head"><span className="eyebrow">Bike Builder</span><h1>{model.label}</h1><p>{model.tag} · {model.engine}</p></div>
-        <Preview b={b} />
+        <Bike3D
+          config={{ style: model.style, paint: find(PAINT, b.paint).color!, wheels: b.wheels, finish: b.finish, exhaust: b.exhaust, seat: b.seat, bars: b.bars, access: b.access }}
+          fallback={<Preview b={b} />} />
         <ol className="bb-steps">{STEPS.map((s, i) => <li key={s}><button type="button" className={i === step ? 'on' : ''} onClick={() => setStep(i)}>{i + 1}. {s}</button></li>)}</ol>
       </div>
       <div className="bb-panel">

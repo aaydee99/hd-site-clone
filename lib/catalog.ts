@@ -36,7 +36,7 @@ export function classify(p: string): Classified {
   else if (a === 'shop') type = 'shop';
   else if (a === 'tools' && b === 'find-a-dealer' && d) type = 'dealer';
   else if (a === 'tools' && b === 'find-a-dealer') type = 'dealer-directory';
-  else if (a === 'motorcycles') type = 'motorcycle';
+  else if (a === 'motorcycles' || (a === 'products' && b === 'bikes.html')) type = 'motorcycle';
   else if (a === 'experiences' || a === 'book-your-event' || a === 'plan.html') type = 'experience';
   else if (a === 'customer-service') type = 'service';
   return { locale, segs, type };
