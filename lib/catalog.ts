@@ -93,6 +93,7 @@ export const COPY = [
 
 // ---- images: original SVG illustrations served by app/img/[...p]/route.ts ----
 import { kindFor, type ArtKind } from './art';
+import { makeT, type Key } from './i18n';
 export function imgFor(p: string, override?: ArtKind): string {
   const c = classify(p);
   let kind: ArtKind = override ?? 'hero';
@@ -109,6 +110,54 @@ export function imgFor(p: string, override?: ArtKind): string {
 export const homeHref = (l: string | null) => (l ? `/${l}/index.html` : '/');
 /** Bike builder lives at the source site's builder URL; only linked where that URL is a real page. */
 export const builderHref = (l: string | null) => { const p = `/${l}/motorcycles/build-custom-motorcycle.html`; return l && PATH_SET.has(p) ? p : undefined; };
+
+// ---- primary navigation ----
+// Top-level sections mirror the source site's information architecture (factual category structure):
+// same sections, same target URLs. Brand-specific labels use the Ironline brand, not the source trademark.
+// Each section's mega-menu columns are derived from that locale's own category URLs.
+type NavDef = { key: Key; hcol?: Key[]; href: (l: string) => string; cols?: { h: Key; match: RegExp; take?: number }[]; promo?: boolean };
+const NAV: NavDef[] = [
+  { key: 'motorcycles', href: l => firstExisting(l, [`/${l}/motorcycles/index.html`, `/${l}/products/bikes.html`]),
+    cols: [{ h: 'lineup', match: /\/motorcycles\/[^/]+\.html$/, take: 8 }], promo: true },
+  { key: 'marketplace', href: l => firstExisting(l, [`/${l}/marketplace.html`]),
+    cols: [{ h: 'shopAll', match: /\/shop\/c\/(certified|used|pre-owned|marketplace)/, take: 6 }] },
+  { key: 'parts', href: l => firstExisting(l, [`/${l}/shop/c/motorcycle-parts`, `/${l}/shop/c/parts`]),
+    cols: [{ h: 'parts', match: /\/shop\/c\/(motorcycle-parts|.*-parts|parts-|oil|exhaust|wheel|seat|brake|light)/, take: 7 }] },
+  { key: 'men', href: l => firstExisting(l, [`/${l}/shop/c/mens-motorcycle-clothes`, `/${l}/shop/c/mens-new-arrivals`]),
+    cols: [{ h: 'men', match: /\/shop\/c\/mens?-/, take: 8 }] },
+  { key: 'women', href: l => firstExisting(l, [`/${l}/shop/c/womens-motorcycle-clothes`, `/${l}/shop/c/womens-new-arrivals`]),
+    cols: [{ h: 'women', match: /\/shop\/c\/womens?-/, take: 8 }] },
+  { key: 'kids', href: l => firstExisting(l, [`/${l}/shop/c/kids`]),
+    cols: [{ h: 'kids', match: /\/shop\/c\/(kids|baby|toddler|youth)/i, take: 8 }] },
+  { key: 'goodsGifts', href: l => firstExisting(l, [`/${l}/shop/c/goods-gifts`]),
+    cols: [{ h: 'goodsGifts', match: /\/shop\/c\/(goods-|gifts?-)/, take: 10 }] },
+  { key: 'discover', href: l => firstExisting(l, [`/${l}/discover-h-d.html`, `/${l}/content/stories.html`]),
+    cols: [{ h: 'explore', match: /\/(content|experiences)\//, take: 8 }] },
+];
+const UTILITY: NavDef[] = [
+  { key: 'learnToRide', href: l => firstExisting(l, [`/${l}/content/motorcycle-training.html`, `/${l}/content/motorcycle-training/learn-to-ride.html`]) },
+  { key: 'testRide', href: l => firstExisting(l, [`/${l}/tools/test-ride.html`, `/${l}/tools/find-a-dealer.html`]) },
+  { key: 'dealerLocator', href: l => firstExisting(l, [`/${l}/tools/find-a-dealer.html`, `/${l}/tools/find-a-dealer/dealership-directory.html`]) },
+  { key: 'trackOrder', href: l => firstExisting(l, [`/${l}/customer-service/shipping-and-delivery.html`, `/${l}/customer-service/contact-us.html`, `/${l}/customer-service/faq.html`]) },
+];
+
+function firstExisting(l: string, candidates: string[]): string {
+  return candidates.find(p => PATH_SET.has(p)) ?? candidates[0];
+}
+
+export type NavItem = { key: string; label: string; href: string; promo?: boolean; cols: { h: string; items: string[] }[] };
+export function navFor(locale: string | null): { primary: NavItem[]; utility: NavItem[] } {
+  if (!locale) return { primary: [], utility: [] };
+  const tr = makeT(locale);
+  const idx = localeIndex(locale);
+  const pool = [...(idx.category ?? []), ...(idx.topic ?? []), ...(idx.motorcycle ?? []), ...(idx.content ?? []), ...(idx.experience ?? [])];
+  const discover = `${tr('discover')} ${BRAND.split(' ')[0]}`;
+  const build = (defs: NavDef[]): NavItem[] => defs.map(d => ({
+    key: d.key, label: d.key === 'discover' ? discover : tr(d.key), href: d.href(locale), promo: d.promo,
+    cols: (d.cols ?? []).map(c => ({ h: tr(c.h), items: pool.filter(p => c.match.test(p)).slice(0, c.take ?? 6) })).filter(c => c.items.length),
+  }));
+  return { primary: build(NAV), utility: build(UTILITY) };
+}
 
 export function search(locale: string, q: string, limit = 60): string[] {
   const terms = q.toLowerCase().split(/\s+/).filter(Boolean);

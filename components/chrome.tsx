@@ -1,5 +1,7 @@
 import Link from '@/components/PlainLink';
-import { BRAND, LOCALES, PATH_SET, builderHref, classify, homeHref, humanize, imgFor, lastSeg, localeIndex, pick, price, productName } from '@/lib/catalog';
+import { BRAND, LOCALES, PATH_SET, builderHref, classify, homeHref, humanize, imgFor, lastSeg, localeIndex, navFor, pick, price, productName } from '@/lib/catalog';
+import { dirOf, langOf, trackerLabels } from '@/lib/i18n';
+import { TrackOrderButton, TrackOrderDrawer } from './OrderTracker';
 import LocaleSelect from './LocaleSelect';
 import { Logo } from './Logo';
 import { CartButton, CartDrawer, MenuToggle, SearchBox } from './interactive';
@@ -8,37 +10,35 @@ import { WeightBody, WeightHead } from './WeightAssets';
 const label = (p: string) => humanize(lastSeg(p) === 'index.html' ? classify(p).segs.at(-2) : lastSeg(p));
 
 export function Shell({ path, locale, type, children }: { path: string; locale: string | null; type: string; children: React.ReactNode }) {
-  const L = locale ? `/${locale}` : '';
-  const idx = localeIndex(locale);
-  const cats = idx.category ?? [];
-  const men = cats.filter(p => /\/mens?-|\/men-/i.test(p)).slice(0, 6);
-  const women = cats.filter(p => /womens?-/i.test(p)).slice(0, 6);
-  const parts = cats.filter(p => /part|seat|exhaust|light|wheel|handlebar|brake|engine/i.test(p)).slice(0, 6);
-  const menus: { title: string; href?: string; cols: { h: string; items: string[] }[]; promo?: { href: string; img: string; t: string } }[] = [
-    { title: 'Motorcycles', href: idx.motorcycle?.[0], cols: [{ h: 'Lineup', items: (idx.motorcycle ?? []).slice(0, 8) }],
-      promo: builderHref(locale) ? { href: builderHref(locale)!, img: '/img/bike/builder.svg', t: 'Build your bike' } : undefined },
-    { title: 'Parts & Accessories', href: parts[0] ?? cats[0], cols: [{ h: 'Popular', items: parts.length ? parts : cats.slice(0, 6) }, { h: 'Explore', items: (idx.topic ?? []).slice(0, 6) }] },
-    { title: 'Apparel', href: men[0] ?? cats[0], cols: [{ h: 'Men', items: men }, { h: 'Women', items: women }] },
-    { title: 'Experiences', href: idx.experience?.[0], cols: [{ h: 'Visit & Ride', items: (idx.experience ?? []).slice(0, 8) }] },
-    { title: 'Find a Dealer', href: idx['dealer-directory']?.[0], cols: [{ h: 'Dealers', items: pick(idx.dealer, 'nav', 6) }] },
-  ];
+  const { primary, utility } = navFor(locale);
+  const builder = builderHref(locale);
   return (
-    <div className="site" data-page-type={type} data-locale={locale ?? ''}>
+    <div className="site" data-page-type={type} data-locale={locale ?? ''} lang={locale ? langOf(locale) : 'en'} dir={dirOf(locale)}>
       <div className="banner">Test environment · fictional brand · placeholder content</div>
+      {locale && (
+        <div className="utility">
+          <div className="utility-inner">
+            <nav>{utility.map(u => u.key === 'trackOrder'
+              ? <TrackOrderButton key={u.key} label={u.label} />
+              : <Link key={u.key} href={u.href} prefetch={false}>{u.label}</Link>)}</nav>
+            <LocaleSelect locales={LOCALES} current={locale} />
+          </div>
+        </div>
+      )}
       <header className="top">
         <div className="top-inner">
           <MenuToggle />
           <Link className="logo" href={homeHref(locale)} aria-label={`${BRAND} home`}><Logo /></Link>
           <nav className="mega">
-            {menus.filter(m => m.href).map(m => (
-              <div className="mega-item" key={m.title}>
-                <Link href={m.href!} prefetch={false} className="mega-top">{m.title}</Link>
-                {m.cols.some(c => c.items.length) && (
+            {primary.map(m => (
+              <div className="mega-item" key={m.label}>
+                <Link href={m.href} prefetch={false} className="mega-top">{m.label}</Link>
+                {(m.cols.length > 0 || m.promo) && (
                   <div className="mega-panel">
-                    {m.cols.filter(c => c.items.length).map(c => (
+                    {m.cols.map(c => (
                       <div key={c.h}><h4>{c.h}</h4>{c.items.map(p => <Link key={p} href={p} prefetch={false}>{label(p)}</Link>)}</div>
                     ))}
-                    {m.promo && <Link className="mega-promo" href={m.promo.href}><img src={m.promo.img} alt="" /><b>{m.promo.t} →</b></Link>}
+                    {m.promo && builder && <Link className="mega-promo" href={builder}><img src="/img/bike/builder.svg" alt="" /><b>Build your bike →</b></Link>}
                   </div>
                 )}
               </div>
@@ -46,7 +46,7 @@ export function Shell({ path, locale, type, children }: { path: string; locale: 
           </nav>
           <div className="top-tools">
             {locale && <SearchBox locale={locale} />}
-            <LocaleSelect locales={LOCALES} current={locale} />
+            {!locale && <LocaleSelect locales={LOCALES} current={locale} />}
             {locale && <CartButton />}
           </div>
         </div>
@@ -56,6 +56,8 @@ export function Shell({ path, locale, type, children }: { path: string; locale: 
       <main>{children}</main>
       <Footer locale={locale} path={path} type={type} />
       {locale && <CartDrawer shopHref={localeIndex(locale).category?.[0] ?? homeHref(locale)} />}
+      {locale && <TrackOrderDrawer labels={trackerLabels(locale)} locale={locale}
+        catalog={pick(localeIndex(locale).product, `track:${locale}`, 24).map(p => ({ path: p, name: productName(p), price: price(p), img: imgFor(p) }))} />}
       <WeightBody type={type} path={path} />
     </div>
   );
