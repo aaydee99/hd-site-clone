@@ -1,0 +1,277 @@
+{
+ "pages": [
+  "/aa/en/index.html",
+  "/ac/ar/index.html",
+  "/ac/en/index.html",
+  "/ap/en/index.html",
+  "/at/de/index.html",
+  "/au/en/index.html",
+  "/be/fr/index.html",
+  "/be/nl/index.html",
+  "/br/pt/index.html",
+  "/ca/en/index.html",
+  "/ca/fr/index.html",
+  "/ch/de/index.html",
+  "/ch/fr/index.html",
+  "/ch/it/index.html",
+  "/cz/cs/index.html",
+  "/de/de/index.html",
+  "/dk/da/index.html",
+  "/es/es/index.html",
+  "/eu/en/index.html",
+  "/fi/fi/index.html",
+  "/fr/fr/index.html",
+  "/gb/en/index.html",
+  "/hu/hu/index.html",
+  "/id/id/index.html",
+  "/ie/en/index.html",
+  "/in/en/index.html",
+  "/it/it/index.html",
+  "/jp/ja/index.html",
+  "/kr/ko/index.html",
+  "/la/es/index.html",
+  "/lu/fr/index.html",
+  "/mx/es/index.html",
+  "/nl/nl/index.html",
+  "/no/no/index.html",
+  "/nz/en/index.html",
+  "/pl/pl/index.html",
+  "/pt/pt/index.html",
+  "/se/sv/index.html",
+  "/th/th/index.html",
+  "/tr/tr/index.html",
+  "/tw/zh/index.html",
+  "/us/en/content/hog.html",
+  "/us/en/content/motorcycle-training.html",
+  "/us/en/content/racing/bagger-world-cup.html",
+  "/us/en/content/stories.html",
+  "/us/en/discover-h-d.html",
+  "/us/en/footer/sitemap.html",
+  "/us/en/footer/user-content-policy.html",
+  "/us/en/footer/utility/privacy-policy.html",
+  "/us/en/footer/utility/terms-of-use.html",
+  "/us/en/footer/utility/we-care-about-you.html",
+  "/us/en/footer/utility/web-accessibility.html",
+  "/us/en/footer/utility/your-privacy-choices.html",
+  "/us/en/index.html",
+  "/us/en/marketplace.html",
+  "/us/en/motorcycles/build-custom-motorcycle.html",
+  "/us/en/motorcycles/cvo-road-glide-st.html",
+  "/us/en/motorcycles/cvo-street-glide-limited.html",
+  "/us/en/motorcycles/cvo-street-glide-st.html",
+  "/us/en/motorcycles/cvo-street-glide.html",
+  "/us/en/motorcycles/dealer-inventory",
+  "/us/en/motorcycles/nightster-special.html",
+  "/us/en/motorcycles/road-glide-limited.html",
+  "/us/en/motorcycles/road-glide.html",
+  "/us/en/motorcycles/street-bob.html",
+  "/us/en/motorcycles/street-glide-limited.html",
+  "/us/en/motorcycles/street-glide.html",
+  "/us/en/motorcycles/touring.html",
+  "/us/en/products/bikes.html",
+  "/us/en/tools/find-a-dealer.html",
+  "/us/en/tools/test-ride.html",
+  "/vn/vi/index.html"
+ ],
+ "redirects": {
+  "/de/de/motorcycles/build-custom-motorcycle.html": [
+   302,
+   "/de/de/motorcycles/h-d-sprint.html"
+  ],
+  "/ru/ru/index.html": [
+   301,
+   "/eu/en/index.html"
+  ],
+  "/gr/en/index.html": [
+   302,
+   "/us/en/index.html"
+  ],
+  "/cn/zh/index.html": [
+   301,
+   "https://www.harley-davidson.cn/cn/zh/index.html"
+  ],
+  "/us": [
+   301,
+   "/us/en/index.html"
+  ],
+  "/us/en/motorcycles.html": [
+   302,
+   "/us/en/errors/404.html"
+  ],
+  "/us/en/shop.html": [
+   302,
+   "/us/en/errors/404.html"
+  ],
+  "/us/en/sitemap.html": [
+   302,
+   "/us/en/errors/404.html"
+  ],
+  "/us/en/shop/cart.html": [
+   302,
+   "/us/en/errors/404.html"
+  ],
+  "/us/en/shop/search.html": [
+   302,
+   "/us/en/errors/404.html"
+  ],
+  "/aa": [
+   301,
+   "/aa/en/index.html"
+  ],
+  "/ac": [
+   301,
+   "/ac/en/index.html"
+  ],
+  "/ap": [
+   301,
+   "/ap/en/index.html"
+  ],
+  "/at": [
+   301,
+   "/at/de/index.html"
+  ],
+  "/au": [
+   301,
+   "/au/en/index.html"
+  ],
+  "/br": [
+   301,
+   "/br/pt/index.html"
+  ],
+  "/ca.html": [
+   301,
+   "/ca/en/index.html"
+  ],
+  "/cz": [
+   301,
+   "/cz/cs/index.html"
+  ],
+  "/de": [
+   301,
+   "/de/de/index.html"
+  ],
+  "/dk": [
+   301,
+   "/dk/da/index.html"
+  ],
+  "/es": [
+   301,
+   "/es/es/index.html"
+  ],
+  "/eu": [
+   301,
+   "/eu/en/index.html"
+  ],
+  "/fi": [
+   301,
+   "/fi/fi/index.html"
+  ],
+  "/fr": [
+   301,
+   "/fr/fr/index.html"
+  ],
+  "/gb": [
+   301,
+   "/gb/en/index.html"
+  ],
+  "/hu": [
+   301,
+   "/hu/hu/index.html"
+  ],
+  "/id": [
+   301,
+   "/id/id/index.html"
+  ],
+  "/ie": [
+   301,
+   "/ie/en/index.html"
+  ],
+  "/in": [
+   301,
+   "/in/en/index.html"
+  ],
+  "/it": [
+   301,
+   "/it/it/index.html"
+  ],
+  "/jp": [
+   301,
+   "/jp/ja/index.html"
+  ],
+  "/kr": [
+   301,
+   "/kr/ko/index.html"
+  ],
+  "/la": [
+   301,
+   "/la/es/index.html"
+  ],
+  "/lu": [
+   301,
+   "/lu/fr/index.html"
+  ],
+  "/mx": [
+   301,
+   "/mx/es/index.html"
+  ],
+  "/nl": [
+   301,
+   "/nl/nl/index.html"
+  ],
+  "/no": [
+   301,
+   "/no/no/index.html"
+  ],
+  "/nz": [
+   301,
+   "/nz/en/index.html"
+  ],
+  "/pl": [
+   301,
+   "/pl/pl/index.html"
+  ],
+  "/pt": [
+   301,
+   "/pt/pt/index.html"
+  ],
+  "/se": [
+   301,
+   "/se/sv/index.html"
+  ],
+  "/th": [
+   301,
+   "/th/th/index.html"
+  ],
+  "/tr": [
+   301,
+   "/tr/tr/index.html"
+  ],
+  "/tw": [
+   301,
+   "/tw/zh/index.html"
+  ],
+  "/vn": [
+   301,
+   "/vn/vi/index.html"
+  ]
+ },
+ "missing": [
+  "/cn/zh/sitemap.xml",
+  "/gr/en/sitemap.xml",
+  "/gu/en/sitemap.xml",
+  "/main-domain-hreflang-my19.xml",
+  "/main-domain-hreflang.xml",
+  "/ru/ru/sitemap.xml"
+ ],
+ "unsupportedLocales": [
+  "cn/zh",
+  "gr/en",
+  "gu/en",
+  "ru/ru"
+ ],
+ "countryToHtml": [
+  "be",
+  "ca",
+  "ch"
+ ]
+}
