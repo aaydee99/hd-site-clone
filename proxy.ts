@@ -4,7 +4,7 @@ import { decide } from '@/lib/routes';
 // Origin-side routing only for rules that need the page list (Cloudflare can't know which pages exist):
 // unknown paths -> the source site's 404 / not-found redirects, error pages, *.xml sitemaps.
 // Pattern redirects, caching, cookies and headers are Cloudflare rules (../cloudflare/). No headers are set here.
-const INTERNAL = /^\/(_next|img|api|sitemap-xml|icon\.svg|favicon\.ico|mirror-404|mirror-500)(\/|$)/;
+const INTERNAL = /^\/(_next|_w|img|api|sitemap-xml|icon\.svg|favicon\.ico|mirror-404|mirror-500)(\/|$)/;
 
 export function proxy(req: NextRequest) {
   const { pathname } = req.nextUrl;

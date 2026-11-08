@@ -1,8 +1,9 @@
-import Link from 'next/link';
+import Link from '@/components/PlainLink';
 import { BRAND, LOCALES, PATH_SET, builderHref, classify, homeHref, humanize, imgFor, lastSeg, localeIndex, pick, price, productName } from '@/lib/catalog';
 import LocaleSelect from './LocaleSelect';
 import { Logo } from './Logo';
 import { CartButton, CartDrawer, MenuToggle, SearchBox } from './interactive';
+import { WeightBody, WeightHead } from './WeightAssets';
 
 const label = (p: string) => humanize(lastSeg(p) === 'index.html' ? classify(p).segs.at(-2) : lastSeg(p));
 
@@ -50,10 +51,12 @@ export function Shell({ path, locale, type, children }: { path: string; locale: 
           </div>
         </div>
       </header>
+      <WeightHead type={type} path={path} />
       <Breadcrumbs path={path} locale={locale} />
       <main>{children}</main>
       <Footer locale={locale} path={path} type={type} />
       {locale && <CartDrawer shopHref={localeIndex(locale).category?.[0] ?? homeHref(locale)} />}
+      <WeightBody type={type} path={path} />
     </div>
   );
 }

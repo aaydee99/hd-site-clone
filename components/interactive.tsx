@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import Link from 'next/link';
+import Link from '@/components/PlainLink';
 
 // ---------- cart (per-browser, localStorage) ----------
 type Item = { path: string; name: string; price: number; qty: number; img: string; option?: string };

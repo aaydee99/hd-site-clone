@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import Link from '@/components/PlainLink';
 import { BRAND, COPY, Classified, LOCALES, PATHS, builderHref, hash, homeHref, humanize, imgFor, lastSeg, localeIndex, pick, price, productName } from '@/lib/catalog';
 import { kindFor } from '@/lib/art';
 import { Card, LinkGrid, ProductGrid } from './chrome';

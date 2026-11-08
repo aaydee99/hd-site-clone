@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useMemo, useState } from 'react';
-import Link from 'next/link';
+import Link from '@/components/PlainLink';
 
 // Original configurator: fictional models, options and prices.
 type Opt = { id: string; label: string; price: number; color?: string };

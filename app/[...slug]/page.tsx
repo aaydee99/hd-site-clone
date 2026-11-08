@@ -5,11 +5,10 @@ import { BuilderPage, LocaleHome, TEMPLATES, titleFor } from '@/components/templ
 import { classify } from '@/lib/catalog';
 import { decide } from '@/lib/routes';
 
-// Pages render on first request, then are cached by ISR. Redirects/errors are decided in proxy.ts
-// (origin rules) and Cloudflare (pattern rules); anything that reaches here and isn't a page is a 404.
-export const revalidate = 3600;
-export const dynamicParams = true;
-export async function generateStaticParams() { return []; }
+// Server-side rendered on every request (no ISR); Cloudflare Cache Rules do all caching.
+// Redirects/errors are decided in proxy.ts (origin rules) and Cloudflare (pattern rules);
+// anything that reaches here and isn't a page is a 404.
+export const dynamic = 'force-dynamic';
 
 type Params = { params: Promise<{ slug: string[] }> };
 
